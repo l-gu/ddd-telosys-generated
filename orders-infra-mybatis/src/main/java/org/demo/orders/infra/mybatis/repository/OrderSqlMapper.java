@@ -16,19 +16,15 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-
-import org.demo.orders.infra.mybatis.common.SqlMapper;
-
 import org.demo.orders.domain.model.Order;
-
 import org.demo.orders.domain.model.OrderItem;
-import org.demo.orders.domain.model.DeliveryAddress;
+import org.demo.orders.infra.mybatis.common.SqlMapper;
 
 @Mapper
 public interface OrderSqlMapper extends SqlMapper<Order, Integer> {
 
 
-	static final String TABLE = "order" ; 
+    static final String TABLE = "\"order\"";
 
 	//----------------------------------------------------------------
 	// Standard methods implementation 
@@ -50,7 +46,7 @@ public interface OrderSqlMapper extends SqlMapper<Order, Integer> {
 
 
 	@Override
-	@Select("SELECT * FROM " + TABLE + " ORDER BY ${sort} ${order} OFFSET ${offset} LIMIT ${limit}")
+    @Select("SELECT * FROM " + TABLE + " ORDER BY ${sort} ${order} LIMIT ${limit} OFFSET ${offset}")
 	@ResultMap("OrderResults") // reuse the same "result map" as defined in "findById"
 	List<Order> findAll(@Param("offset") Integer offset, @Param("limit") Integer limit,
 								  @Param("sort")   String sort,    @Param("order") String order);

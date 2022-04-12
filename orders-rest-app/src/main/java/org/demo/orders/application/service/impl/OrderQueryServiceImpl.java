@@ -7,15 +7,16 @@ package org.demo.orders.application.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-import javax.inject.Inject;
-import org.springframework.stereotype.Component;
 
-import org.demo.orders.rest.dto.response.OrderRestResponse;
+import javax.inject.Inject;
+
+import org.demo.orders.application.mapper.OrderMapper;
+import org.demo.orders.application.service.OrderQueryService;
 import org.demo.orders.domain.model.Order;
 import org.demo.orders.domain.repository.OrderRepository;
-import org.demo.orders.application.mapper.OrderMapper;
 import org.demo.orders.rest.dto.OrderRestDto;
-import org.demo.orders.application.service.OrderQueryService;
+import org.demo.orders.rest.dto.response.OrderRestResponse;
+import org.springframework.stereotype.Component;
 
 /**
  * Service for "QUERIES" (database read operations)
@@ -26,7 +27,7 @@ import org.demo.orders.application.service.OrderQueryService;
 @Component
 public class OrderQueryServiceImpl implements OrderQueryService {
 
-	@Inject
+    @Inject
 	private OrderRepository orderRepository;
 	
 	@Inject

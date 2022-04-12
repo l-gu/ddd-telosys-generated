@@ -1,6 +1,9 @@
-package org.demo.orders;
+package org.demo.orders.config;
+
+import java.util.stream.Collectors;
 
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.ServerProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
@@ -9,8 +12,6 @@ import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.core.type.filter.TypeFilter;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.stream.Collectors;
 
 //import io.swagger.jaxrs.listing.ApiListingResource;
 
@@ -28,11 +29,10 @@ public class JerseyConfig extends ResourceConfig {
 	@Autowired
 	// value : package root in property (application.properties)
 	public JerseyConfig(@Value("${jersey.basePackage}") String basePackage) {
-		System.out.println("JerseyConfig *****");
 		// register custom resources
 		register(basePackage, new AnnotationTypeFilter(RestController.class));
 		// configure Jersey
-		// property(ServerProperties.WADL_FEATURE_DISABLE, true);
+        property(ServerProperties.WADL_FEATURE_DISABLE, true);
 	}
 
 	private void register(String basePackage, TypeFilter typeFilter) {

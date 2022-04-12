@@ -2,22 +2,22 @@
 
 --changeset telosys:orders-001
 
-CREATE TABLE "catalog"
+CREATE TABLE catalog
 (
-  year smallint NOT NULL,
+  "year" smallint NOT NULL,
   quarter smallint NOT NULL,
   title varchar(50) NOT NULL,
-  PRIMARY KEY (year, quarter)
+  PRIMARY KEY ("year", quarter)
 );
 
-CREATE TABLE "category"
+CREATE TABLE category
 (
   code smallint NOT NULL,
   name varchar(60) ,
   PRIMARY KEY (code)
 );
 
-CREATE TABLE "customer"
+CREATE TABLE customer
 (
   id integer NOT NULL,
   first_name varchar(60) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE "customer"
   PRIMARY KEY (id)
 );
 
-CREATE TABLE "customer_address"
+CREATE TABLE customer_address
 (
   id integer NOT NULL,
   street varchar(30) NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE "customer_address"
   PRIMARY KEY (id)
 );
 
-CREATE TABLE "delivery_address"
+CREATE TABLE delivery_address
 (
   id integer NOT NULL,
   order_num integer ,
@@ -49,7 +49,7 @@ CREATE TABLE "delivery_address"
   PRIMARY KEY (id)
 );
 
-CREATE TABLE "order"
+CREATE TABLE "ORDER"
 (
   num integer NOT NULL,
   order_date date NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE "order"
   PRIMARY KEY (num)
 );
 
-CREATE TABLE "order_item"
+CREATE TABLE order_item
 (
   id bigint NOT NULL,
   order_num integer ,
@@ -71,7 +71,7 @@ CREATE TABLE "order_item"
   PRIMARY KEY (id)
 );
 
-CREATE TABLE "product"
+CREATE TABLE product
 (
   code CHAR(5) NOT NULL,
   name varchar(60) NOT NULL,
@@ -86,44 +86,44 @@ CREATE TABLE "product"
 );
 
 
-ALTER TABLE "customer_address"
+ALTER TABLE customer_address
   ADD CONSTRAINT "FK_CustomerAddress_Customer" FOREIGN KEY(customer_id) 
-  REFERENCES "customer"(id) ;
-CREATE INDEX ON "customer_address"(customer_id) ;
+  REFERENCES customer(id) ;
+CREATE INDEX ON customer_address(customer_id) ;
 
-ALTER TABLE "delivery_address"
+ALTER TABLE delivery_address
   ADD CONSTRAINT "FK_DeliveryAddress_Order" FOREIGN KEY(order_num) 
-  REFERENCES "order"(num) ;
-CREATE INDEX ON "delivery_address"(order_num) ;
+  REFERENCES "ORDER"(num) ;
+CREATE INDEX ON delivery_address(order_num) ;
 
-ALTER TABLE "order"
+ALTER TABLE "ORDER"
   ADD CONSTRAINT "FK_Order_Customer" FOREIGN KEY(customer_id) 
-  REFERENCES "customer"(id) ;
-CREATE INDEX ON "order"(customer_id) ;
+  REFERENCES customer(id) ;
+CREATE INDEX ON "ORDER"(customer_id) ;
 
-ALTER TABLE "order_item"
+ALTER TABLE order_item
   ADD CONSTRAINT "FK_OrderItem_Order" FOREIGN KEY(order_num) 
-  REFERENCES "order"(num) ;
-CREATE INDEX ON "order_item"(order_num) ;
-ALTER TABLE "order_item"
+  REFERENCES "ORDER"(num) ;
+CREATE INDEX ON order_item(order_num) ;
+ALTER TABLE order_item
   ADD CONSTRAINT "FK_OrderItem_Product" FOREIGN KEY(product_code) 
-  REFERENCES "product"(code) ;
-CREATE INDEX ON "order_item"(product_code) ;
+  REFERENCES product(code) ;
+CREATE INDEX ON order_item(product_code) ;
 
-ALTER TABLE "product"
+ALTER TABLE product
   ADD CONSTRAINT "FK_Product_Category" FOREIGN KEY(category_id) 
-  REFERENCES "category"(code) ;
-CREATE INDEX ON "product"(category_id) ;
-ALTER TABLE "product"
+  REFERENCES category(code) ;
+CREATE INDEX ON product(category_id) ;
+ALTER TABLE product
   ADD CONSTRAINT "FK_PROD_CATALOG" FOREIGN KEY(catalog_year,catalog_quarter) 
-  REFERENCES "catalog"(year,quarter) ;
-CREATE INDEX ON "product"(catalog_year,catalog_quarter) ;
+  REFERENCES catalog("year",quarter) ;
+CREATE INDEX ON product(catalog_year,catalog_quarter) ;
 
 
 
 --rollback drop table product cascade ;  
 --rollback drop table order_item cascade ;  
---rollback drop table order cascade ;  
+--rollback drop table "ORDER" cascade ;  
 --rollback drop table delivery_address cascade ;  
 --rollback drop table customer_address cascade ;  
 --rollback drop table customer cascade ;  

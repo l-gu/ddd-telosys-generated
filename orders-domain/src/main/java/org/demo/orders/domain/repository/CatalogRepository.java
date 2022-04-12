@@ -4,10 +4,7 @@
  */
 package org.demo.orders.domain.repository;
 
-import java.util.List;
-
 import org.demo.orders.domain.common.AggregateRootRepository;
-
 import org.demo.orders.domain.model.Catalog;
 import org.demo.orders.domain.model.CatalogId;
 

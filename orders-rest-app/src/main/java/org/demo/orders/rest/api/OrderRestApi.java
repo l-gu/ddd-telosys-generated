@@ -5,7 +5,15 @@
 
 package org.demo.orders.rest.api;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import org.demo.orders.rest.dto.OrderRestDto;
@@ -21,12 +29,13 @@ public interface OrderRestApi {
     @GET
     @Path("/{num}")
     @Produces({ "application/json" })	
-	Response getOrder(Integer num);
+    Response getOrder(@PathParam("num") Integer num);
 
     @GET
     @Path("/")
     @Produces({ "application/json" })	
-	Response findOrder(Integer page, Integer size, String sort, String order);
+    Response findOrder(@QueryParam("page") Integer page, @QueryParam("size") Integer size,
+            @QueryParam("sort") String sort, @QueryParam("order") String order);
 
     @POST
     @Path("/")
@@ -34,11 +43,11 @@ public interface OrderRestApi {
 	Response insertOrder(OrderRestDto orderRestDto);
 
     @PUT	
-    @Path("/")
+    @Path("/{num}")
     @Consumes({ "application/json" })
-	Response updateOrder(Integer num, OrderRestDto orderRestDto);		
+    Response updateOrder(@PathParam("num") Integer num, OrderRestDto orderRestDto);
 
 	@DELETE
     @Path("/{num}")
-	Response deleteOrder(Integer num);
+    Response deleteOrder(@PathParam("num") Integer num);
 }

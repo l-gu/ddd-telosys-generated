@@ -8,19 +8,13 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-
-import org.demo.orders.infra.mybatis.common.SqlMapper;
-
 import org.demo.orders.domain.model.Catalog;
 import org.demo.orders.domain.model.CatalogId;
+import org.demo.orders.infra.mybatis.common.SqlMapper;
 
 
 @Mapper
@@ -39,18 +33,18 @@ public interface CatalogSqlMapper extends SqlMapper<Catalog, CatalogId> {
 
 	@Override
 	@Select("SELECT * FROM " + TABLE  +
-			" WHERE year = #{year} AND quarter = #{quarter} " )
+            " WHERE \"year\" = #{year} AND quarter = #{quarter} ")
 	Catalog findById(CatalogId id);
 
 
 	@Override
-	@Select("SELECT * FROM " + TABLE + " ORDER BY ${sort} ${order} OFFSET ${offset} LIMIT ${limit}")
+    @Select("SELECT * FROM " + TABLE + " ORDER BY ${sort} ${order} LIMIT ${limit} OFFSET ${offset}")
 	List<Catalog> findAll(@Param("offset") Integer offset, @Param("limit") Integer limit,
 								  @Param("sort")   String sort,    @Param("order") String order);
 
 	@Override
 	@Insert("INSERT INTO " + TABLE + "( " +
-			"year, quarter, title" +
+            "\"year\", quarter, title" +
 			" ) VALUES ( " +
 			"#{year}, #{quarter}, #{title}" +
 			")")
@@ -60,12 +54,12 @@ public interface CatalogSqlMapper extends SqlMapper<Catalog, CatalogId> {
 	@Update("UPDATE " + TABLE + 
 			" SET " +
 			" title = #{title} " +
-			" WHERE year = #{year} AND quarter = #{quarter}" )
+            " WHERE \"year\" = #{year} AND quarter = #{quarter}")
 	int update(Catalog catalog);
 
 	@Override
 	@Delete("DELETE FROM " + TABLE + 
-			" WHERE year = #{year} AND quarter = #{quarter}" )
+            " WHERE \"year\" = #{year} AND quarter = #{quarter}")
 	int delete(Catalog catalog);
 
 
