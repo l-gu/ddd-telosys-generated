@@ -1,0 +1,8 @@
+# https://docs.liquibase.com/concepts/advanced/include.html
+databaseChangeLog:
+- include:
+    # inserer ici tous les 'changeset files' dans l'ordre d'execution
+    # ( un fichier sql pour chaque 'changeset' )
+    file: db/orders-001.sql
+    # file: db/orders-002.sql
+    # file: db/orders-003.sql

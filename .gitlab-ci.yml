@@ -1,0 +1,4 @@
+include:
+  - project: 'transverse/gitlab-ci-commons'
+    ref: 'monitoring'
+    file: 'Build-Pipeline.Composant.MS.gitlab-ci.yml'

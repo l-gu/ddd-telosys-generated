@@ -1,0 +1,9 @@
+version: "2"
+plugins:
+  sonar-java:
+    enabled: true
+    config:
+      sonar.java.source: "11"
+exclude_patterns:
+  - "**/*Test.java"
+  - "**/target/generated-sources/"
