@@ -18,6 +18,7 @@
 		<mapstruct.version>1.4.2.Final</mapstruct.version>
         <mybatis.version>2.2.0</mybatis.version>
         <jakarta.inject.version>2.6.1</jakarta.inject.version>
+        <h2.version>2.1.212</h2.version>
 	</properties>
 	
 	<modules>
@@ -87,7 +88,7 @@
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
-                <version>2.1.212</version>
+                <version>${h2.version}</version>
                 <scope>runtime</scope>
             </dependency>
 		</dependencies>
