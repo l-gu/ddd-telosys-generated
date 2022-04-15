@@ -12,11 +12,6 @@
 	<packaging>jar</packaging>
 	<name>orders-domain</name>
     
-	<properties>
-        <!-- Do not deploy on Nexus -->
-        <maven.deploy.skip>true</maven.deploy.skip>
-    </properties>
-	
 	<dependencies>
         <!-- dependencies only for DTO -->
 		<dependency>
@@ -24,11 +19,5 @@
 			<artifactId>orders-rest-dto</artifactId>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-
-		</plugins>
-	</build>
 
 </project>

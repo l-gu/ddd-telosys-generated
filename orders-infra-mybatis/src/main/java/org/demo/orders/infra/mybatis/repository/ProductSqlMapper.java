@@ -8,20 +8,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-
-import org.demo.orders.infra.mybatis.common.SqlMapper;
-
 import org.demo.orders.domain.model.Product;
-
-import org.demo.orders.domain.model.Category;
+import org.demo.orders.infra.mybatis.common.SqlMapper;
 
 @Mapper
 public interface ProductSqlMapper extends SqlMapper<Product, String> {
@@ -44,7 +36,7 @@ public interface ProductSqlMapper extends SqlMapper<Product, String> {
 
 
 	@Override
-	@Select("SELECT * FROM " + TABLE + " ORDER BY ${sort} ${order} OFFSET ${offset} LIMIT ${limit}")
+    @Select("SELECT * FROM " + TABLE + " ORDER BY ${sort} ${order} LIMIT ${limit} OFFSET ${offset}")
 	List<Product> findAll(@Param("offset") Integer offset, @Param("limit") Integer limit,
 								  @Param("sort")   String sort,    @Param("order") String order);
 

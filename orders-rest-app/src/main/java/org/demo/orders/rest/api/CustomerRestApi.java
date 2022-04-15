@@ -5,7 +5,15 @@
 
 package org.demo.orders.rest.api;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import org.demo.orders.rest.dto.CustomerRestDto;
@@ -21,12 +29,13 @@ public interface CustomerRestApi {
     @GET
     @Path("/{id}")
     @Produces({ "application/json" })	
-	Response getCustomer(Integer id);
+    Response getCustomer(@PathParam("id") Integer id);
 
     @GET
     @Path("/")
     @Produces({ "application/json" })	
-	Response findCustomer(Integer page, Integer size, String sort, String order);
+    Response findCustomer(@QueryParam("page") Integer page, @QueryParam("size") Integer size,
+            @QueryParam("sort") String sort, @QueryParam("order") String order);
 
     @POST
     @Path("/")
@@ -34,11 +43,11 @@ public interface CustomerRestApi {
 	Response insertCustomer(CustomerRestDto customerRestDto);
 
     @PUT	
-    @Path("/")
+    @Path("/{id}")
     @Consumes({ "application/json" })
-	Response updateCustomer(Integer id, CustomerRestDto customerRestDto);		
+    Response updateCustomer(@PathParam("id") Integer id, CustomerRestDto customerRestDto);
 
 	@DELETE
     @Path("/{id}")
-	Response deleteCustomer(Integer id);
+    Response deleteCustomer(@PathParam("id") Integer id);
 }

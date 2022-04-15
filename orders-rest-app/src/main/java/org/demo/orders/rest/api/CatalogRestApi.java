@@ -5,7 +5,15 @@
 
 package org.demo.orders.rest.api;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import org.demo.orders.rest.dto.CatalogRestDto;
@@ -21,12 +29,13 @@ public interface CatalogRestApi {
     @GET
     @Path("/{year}/{quarter}")
     @Produces({ "application/json" })	
-	Response getCatalog(short year, short quarter);
+    Response getCatalog(@PathParam("year") short year, @PathParam("quarter") short quarter);
 
     @GET
     @Path("/")
     @Produces({ "application/json" })	
-	Response findCatalog(Integer page, Integer size, String sort, String order);
+    Response findCatalog(@QueryParam("page") Integer page, @QueryParam("size") Integer size,
+            @QueryParam("sort") String sort, @QueryParam("order") String order);
 
     @POST
     @Path("/")
@@ -34,11 +43,12 @@ public interface CatalogRestApi {
 	Response insertCatalog(CatalogRestDto catalogRestDto);
 
     @PUT	
-    @Path("/")
+    @Path("/{year}/{quarter}")
     @Consumes({ "application/json" })
-	Response updateCatalog(short year, short quarter, CatalogRestDto catalogRestDto);		
+    Response updateCatalog(@PathParam("year") short year, @PathParam("quarter") short quarter,
+            CatalogRestDto catalogRestDto);
 
 	@DELETE
     @Path("/{year}/{quarter}")
-	Response deleteCatalog(short year, short quarter);
+    Response deleteCatalog(@PathParam("year") short year, @PathParam("quarter") short quarter);
 }

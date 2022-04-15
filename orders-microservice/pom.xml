@@ -11,38 +11,96 @@
 	<artifactId>orders-microservice</artifactId>
 	<packaging>jar</packaging>
 	<name>orders-microservice</name>
-    
-	<properties>
-        <!-- Do not deploy in Nexus -->
-        <maven.deploy.skip>true</maven.deploy.skip>
-    </properties>
 	
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>org.demo.orders</groupId>
+			<artifactId>orders-rest-app</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jersey</artifactId>
-		</dependency>
-		<!--
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-commons</artifactId>
-		</dependency>
-		-->
 	</dependencies>
 
-	<build>
-		<plugins>
-		<!--
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-			</plugin>
-		-->
-		</plugins>
-	</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>org.demo.orders.SpringBootApp</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>prod</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>dev-eclipse</id>
+            <activation>
+                <file>
+                    <exists>.project</exists>
+                </file>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-devtools</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>dev-intellij</id>
+            <activation>
+                <file>
+                    <exists>.idea</exists>
+                </file>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-devtools</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>dev-netbeans</id>
+            <activation>
+                <file>
+                    <exists>nbproject/</exists>
+                </file>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-devtools</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>dev-vscode</id>
+            <activation>
+                <file>
+                    <exists>.vscode/</exists>
+                </file>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-devtools</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 
 </project>

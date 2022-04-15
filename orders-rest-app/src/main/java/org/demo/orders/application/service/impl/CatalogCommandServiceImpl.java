@@ -9,18 +9,16 @@ import java.util.Optional;
 
 import javax.inject.Inject;
 
-import org.springframework.stereotype.Component;
-
+import org.demo.orders.application.exception.CatalogException;
+import org.demo.orders.application.exception.ErrorCode;
+import org.demo.orders.application.mapper.CatalogMapper;
+import org.demo.orders.application.service.CatalogCommandService;
 import org.demo.orders.domain.model.Catalog;
 import org.demo.orders.domain.model.CatalogFactoryRestDto;
 import org.demo.orders.domain.model.CatalogId;
 import org.demo.orders.domain.repository.CatalogRepository;
-import org.demo.orders.application.mapper.CatalogMapper;
-import org.demo.orders.application.exception.CatalogException;
-import org.demo.orders.application.exception.ErrorCode;
 import org.demo.orders.rest.dto.CatalogRestDto;
-import org.demo.orders.application.service.CatalogCommandService;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Component;
 
 /**
  * Service for "COMMANDS" (database write operations)
@@ -28,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author @{AUTHOR}
  */
-@RestController
+@Component
 public class CatalogCommandServiceImpl implements CatalogCommandService {
 
 	@Inject

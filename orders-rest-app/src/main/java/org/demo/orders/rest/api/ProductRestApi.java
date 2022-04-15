@@ -5,7 +5,15 @@
 
 package org.demo.orders.rest.api;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import org.demo.orders.rest.dto.ProductRestDto;
@@ -21,12 +29,13 @@ public interface ProductRestApi {
     @GET
     @Path("/{code}")
     @Produces({ "application/json" })	
-	Response getProduct(String code);
+    Response getProduct(@PathParam("code") String code);
 
     @GET
     @Path("/")
     @Produces({ "application/json" })	
-	Response findProduct(Integer page, Integer size, String sort, String order);
+    Response findProduct(@QueryParam("page") Integer page, @QueryParam("size") Integer size,
+            @QueryParam("sort") String sort, @QueryParam("order") String order);
 
     @POST
     @Path("/")
@@ -34,11 +43,11 @@ public interface ProductRestApi {
 	Response insertProduct(ProductRestDto productRestDto);
 
     @PUT	
-    @Path("/")
+    @Path("/{code}")
     @Consumes({ "application/json" })
-	Response updateProduct(String code, ProductRestDto productRestDto);		
+    Response updateProduct(@PathParam("code") String code, ProductRestDto productRestDto);
 
 	@DELETE
     @Path("/{code}")
-	Response deleteProduct(String code);
+    Response deleteProduct(@PathParam("code") String code);
 }
